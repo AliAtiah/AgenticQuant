@@ -1,6 +1,6 @@
 # AgenticQuant
 
-**AI-powered quantitative trading platform** with backtesting, live charting, and autonomous trading agents.
+**AI-powered quantitative trading platform** with backtesting, live charting, and autonomous trading agents. This is the second version.
 
 Built to compete with TradingView and QuantConnect -- with an AI-first approach.
 
