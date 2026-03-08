@@ -17,7 +17,8 @@ export default function ChartWidget({ data, height = 500 }: ChartWidgetProps) {
     if (!containerRef.current || data.length === 0) return;
 
     if (chartRef.current) {
-      chartRef.current.remove();
+      try { chartRef.current.remove(); } catch { /* already disposed */ }
+      chartRef.current = null;
     }
 
     const chart = createChart(containerRef.current, {
@@ -89,7 +90,7 @@ export default function ChartWidget({ data, height = 500 }: ChartWidgetProps) {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      chart.remove();
+      try { chart.remove(); } catch { /* already disposed */ }
       chartRef.current = null;
     };
   }, [data, height]);

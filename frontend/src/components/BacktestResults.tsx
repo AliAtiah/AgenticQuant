@@ -27,7 +27,10 @@ export default function BacktestResults({ result }: BacktestResultsProps) {
   useEffect(() => {
     if (!chartRef.current || result.equity_curve.length === 0) return;
 
-    if (chartInstance.current) chartInstance.current.remove();
+    if (chartInstance.current) {
+      try { chartInstance.current.remove(); } catch { /* already disposed */ }
+      chartInstance.current = null;
+    }
 
     const chart = createChart(chartRef.current, {
       height: 300,
@@ -66,7 +69,8 @@ export default function BacktestResults({ result }: BacktestResultsProps) {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
-      chart.remove();
+      try { chart.remove(); } catch { /* already disposed */ }
+      chartInstance.current = null;
     };
   }, [result, returnPositive]);
 
