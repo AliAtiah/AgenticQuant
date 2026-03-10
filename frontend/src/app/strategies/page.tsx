@@ -17,24 +17,27 @@ export default function StrategiesPage() {
   }, []);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">Strategies</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            View and configure quantitative trading strategies
-          </p>
-        </div>
+    <div className="space-y-5 max-w-5xl">
+      <div>
+        <h1 className="text-xl font-bold text-surface-100">Strategies</h1>
+        <p className="text-xs text-surface-400 mt-1">
+          View and configure quantitative trading strategies
+        </p>
       </div>
 
       {loading ? (
         <div className="flex justify-center py-12">
-          <div className="text-gray-500">Loading strategies...</div>
+          <div className="flex items-center gap-2 text-surface-400 text-xs">
+            <div className="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+            <div className="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+            <div className="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+            <span className="ml-1">Loading strategies...</span>
+          </div>
         </div>
       ) : strategies.length > 0 ? (
         <StrategyForm strategies={strategies} />
       ) : (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-surface-400 text-xs">
           <p>No strategies loaded. Make sure the backend is running.</p>
         </div>
       )}

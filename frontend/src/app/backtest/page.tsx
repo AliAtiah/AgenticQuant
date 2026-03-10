@@ -16,10 +16,13 @@ export default function BacktestPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api.getStrategies().then((s) => {
-      setStrategies(s);
-      if (s.length > 0) setSelectedStrategy(s[0].name);
-    }).catch(() => {});
+    api
+      .getStrategies()
+      .then((s) => {
+        setStrategies(s);
+        if (s.length > 0) setSelectedStrategy(s[0].name);
+      })
+      .catch(() => {});
   }, []);
 
   const runBacktest = async () => {
@@ -43,67 +46,93 @@ export default function BacktestPage() {
     }
   };
 
-  const currentStrategy = strategies.find((s) => s.name === selectedStrategy);
+  const currentStrategy = strategies.find(
+    (s) => s.name === selectedStrategy
+  );
+
+  const inputClasses =
+    "w-full bg-surface-900 border border-surface-700 rounded px-3 py-2 text-xs text-surface-100 focus:outline-none focus:border-brand-500 transition-colors";
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Backtesting Engine</h1>
+    <div className="space-y-5 max-w-6xl">
+      <div>
+        <h1 className="text-xl font-bold text-surface-100">
+          Backtesting Engine
+        </h1>
+        <p className="text-xs text-surface-400 mt-1">
+          Test strategies against historical data
+        </p>
+      </div>
 
-      <div className="bg-surface-800 rounded-lg border border-surface-600 p-6">
+      <div className="bg-surface-800 rounded-lg border border-surface-700 p-5">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs text-gray-500 mb-1.5">Strategy</label>
+            <label className="block text-[10px] text-surface-400 mb-1 uppercase tracking-wider font-medium">
+              Strategy
+            </label>
             <select
               value={selectedStrategy}
               onChange={(e) => setSelectedStrategy(e.target.value)}
-              className="w-full bg-surface-700 border border-surface-500 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
+              className={inputClasses}
             >
               {strategies.map((s) => (
-                <option key={s.name} value={s.name}>{s.display_name}</option>
+                <option key={s.name} value={s.name}>
+                  {s.display_name}
+                </option>
               ))}
             </select>
             {currentStrategy && (
-              <p className="text-xs text-gray-500 mt-1">{currentStrategy.description}</p>
+              <p className="text-[10px] text-surface-500 mt-1">
+                {currentStrategy.description}
+              </p>
             )}
           </div>
 
           <div>
-            <label className="block text-xs text-gray-500 mb-1.5">Symbol</label>
+            <label className="block text-[10px] text-surface-400 mb-1 uppercase tracking-wider font-medium">
+              Symbol
+            </label>
             <input
               type="text"
               value={symbol}
               onChange={(e) => setSymbol(e.target.value.toUpperCase())}
-              className="w-full bg-surface-700 border border-surface-500 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
+              className={inputClasses}
             />
           </div>
 
           <div>
-            <label className="block text-xs text-gray-500 mb-1.5">Initial Capital ($)</label>
+            <label className="block text-[10px] text-surface-400 mb-1 uppercase tracking-wider font-medium">
+              Initial Capital ($)
+            </label>
             <input
               type="number"
               value={capital}
               onChange={(e) => setCapital(e.target.value)}
-              className="w-full bg-surface-700 border border-surface-500 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
+              className={inputClasses}
             />
           </div>
 
           <div>
-            <label className="block text-xs text-gray-500 mb-1.5">Start Date</label>
+            <label className="block text-[10px] text-surface-400 mb-1 uppercase tracking-wider font-medium">
+              Start Date
+            </label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="w-full bg-surface-700 border border-surface-500 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
+              className={inputClasses}
             />
           </div>
 
           <div>
-            <label className="block text-xs text-gray-500 mb-1.5">End Date</label>
+            <label className="block text-[10px] text-surface-400 mb-1 uppercase tracking-wider font-medium">
+              End Date
+            </label>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="w-full bg-surface-700 border border-surface-500 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-500"
+              className={inputClasses}
             />
           </div>
 
@@ -111,7 +140,7 @@ export default function BacktestPage() {
             <button
               onClick={runBacktest}
               disabled={loading || !selectedStrategy}
-              className="w-full bg-brand-600 hover:bg-brand-700 px-6 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+              className="w-full bg-brand-500 hover:bg-brand-600 px-4 py-2 rounded text-xs font-medium transition-colors disabled:opacity-50"
             >
               {loading ? "Running..." : "Run Backtest"}
             </button>
@@ -120,7 +149,7 @@ export default function BacktestPage() {
       </div>
 
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg p-3 text-sm">
+        <div className="bg-[#ef535015] border border-[#ef535033] text-[#ef5350] rounded px-3 py-2.5 text-xs">
           {error}
         </div>
       )}

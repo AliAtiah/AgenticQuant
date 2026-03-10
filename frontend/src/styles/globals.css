@@ -3,29 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0b0e14;
-  --bg-secondary: #111720;
-  --bg-tertiary: #171d2b;
-  --text-primary: #e6edf3;
-  --text-secondary: #8b949e;
-  --accent: #2aa3ff;
-  --green: #3fb950;
-  --red: #f85149;
+  --bg-primary: #131722;
+  --bg-secondary: #1E222D;
+  --bg-tertiary: #2A2E39;
+  --text-primary: #D1D4DC;
+  --text-secondary: #787B86;
+  --text-muted: #4A4E59;
+  --accent: #2962FF;
+  --accent-hover: #1E53E5;
+  --green: #26a69a;
+  --red: #ef5350;
+  --border: #2A2E39;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #2a3347 transparent;
+  scrollbar-color: #363a45 transparent;
 }
 
 *::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 *::-webkit-scrollbar-track {
@@ -33,6 +40,27 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #2a3347;
+  background-color: #363a45;
   border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4e59;
+}
+
+::selection {
+  background-color: rgba(41, 98, 255, 0.3);
+  color: #d1d4dc;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23787B86' d='M3 5l3 3 3-3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
 }
